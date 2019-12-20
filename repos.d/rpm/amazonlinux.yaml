@@ -1,0 +1,31 @@
+- name: amzn2
+  type: repository
+  desc: Amazon Linux 2
+  family: fedora
+  sources:
+    - name: core
+      fetcher: RepodataSqliteFetcher
+      parser: RepodataSqliteParser
+      url: http://amazonlinux.us-west-2.amazonaws.com/2/core/2.0/SRPMS/mirror.list
+  repolinks:
+    - desc: Amazon Linux 2
+      url: https://aws.amazon.com/amazon-linux-2/
+  tags: [ all, production, rpm, amazonlinux ]
+
+- name: amzn1
+  type: repository
+  desc: Amazon Linux 1
+  family: fedora
+  sources:
+    - name: updates
+      fetcher: RepodataSqliteFetcher
+      parser: RepodataSqliteParser
+      url: http://repo.us-west-2.amazonaws.com/latest/updates/SRPMS/mirror.list
+    - name: main
+      fetcher: RepodataSqliteFetcher
+      parser: RepodataSqliteParser
+      url: http://repo.us-west-2.amazonaws.com/latest/main/SRPMS/mirror.list
+  repolinks:
+    - desc: Amazon Linux AMI
+      url: https://aws.amazon.com/amazon-linux-ami/
+  tags: [ all, production, rpm, amazonlinux ]
