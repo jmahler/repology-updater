@@ -35,6 +35,15 @@ class RepodataFetcher(ScratchFileFetcher):
 
     def _do_fetch(self, statefile: AtomicFile, persdata: PersistentData, logger: Logger) -> bool:
 
+        # if given url is a mirror.list convert it to a baseurl
+        if self.url.endswith('mirror.list'):
+            baseurls = do_http(self.url, check_status=True, timeout=self.fetch_timeout).text
+            baseurl = baseurls.split()[0]  # take the first mirror
+            baseurl = baseurl.rstrip()
+            if not baseurl.endswith('/'):
+                baseurl = baseurl + '/'
+            self.url = baseurl
+
         # fetch and parse repomd.xml
         repomd_url = self.url + 'repodata/repomd.xml'
         logger.log('fetching metadata from ' + repomd_url)
